@@ -98,6 +98,8 @@ tasks.getByName<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("sha
     exclude("META-INF/LICENSE")
     exclude("META-INF/NOTICE")
     exclude("META-INF/io.netty.versions.properties")
+    exclude("xsd/**")
+    exclude("migrations/**")
 
     relocate("com.fasterxml", "spp.processor.common.com.fasterxml")
     relocate("com.google.common", "spp.processor.common.com.google.common")
