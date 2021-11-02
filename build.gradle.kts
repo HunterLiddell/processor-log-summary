@@ -98,6 +98,7 @@ tasks.getByName<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("sha
     exclude("META-INF/INDEX.LIST")
     exclude("META-INF/README.txt")
     exclude("META-INF/ABOUT.txt")
+    exclude("META-INF/LICENSE.txt")
     exclude("META-INF/LICENSE")
     exclude("META-INF/NOTICE")
     exclude("META-INF/CHANGELOG")
