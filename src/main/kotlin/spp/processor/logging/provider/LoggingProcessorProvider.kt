@@ -4,7 +4,6 @@ import org.apache.skywalking.oap.server.core.storage.StorageModule
 import org.apache.skywalking.oap.server.library.module.ModuleConfig
 import org.apache.skywalking.oap.server.library.module.ModuleDefine
 import org.apache.skywalking.oap.server.library.module.ModuleProvider
-import org.apache.skywalking.oap.server.receiver.sharing.server.SharingServerModule
 import org.slf4j.LoggerFactory
 import spp.processor.LogSummaryProcessor
 
@@ -31,8 +30,7 @@ class LoggingProcessorProvider : ModuleProvider() {
     override fun notifyAfterCompleted() = Unit
     override fun requiredModules(): Array<String> {
         return arrayOf(
-            StorageModule.NAME,
-            SharingServerModule.NAME
+            StorageModule.NAME
         )
     }
 }
