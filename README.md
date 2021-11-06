@@ -8,6 +8,14 @@
 
 The project provides additional backend processing to the [Source++](https://github.com/sourceplusplus/live-platform) open-source live coding platform.
 
+## Requirements
+
+- SkyWalking OAP
+  - Storage = elasticsearch/elastichsearch7
+  - Version >= 8.0.0
+- Modules
+  - `StorageModule`
+
 ## Live Coding - Index
 - Live Coding Server
   - [Live Platform](https://github.com/sourceplusplus/live-platform)
