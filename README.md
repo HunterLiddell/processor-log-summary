@@ -20,5 +20,5 @@ Todo: log summary description and pics
   - [JVM](https://github.com/sourceplusplus/processor-instrument)
   - [Python](https://github.com/sourceplusplus/processor-log-summary)
 - Live Coding Processors
-  - [Live Instrument Processor](https://github.com/sourceplusplus/processor-instrument)
-  - [Log Summary Processor](https://github.com/sourceplusplus/processor-log-summary)
+  - [Live Instrument](https://github.com/sourceplusplus/processor-instrument)
+  - [Log Summary](https://github.com/sourceplusplus/processor-log-summary)
