@@ -1,4 +1,4 @@
-name: Build log summary processor
+name: Build processor
 
 on:
   push:
