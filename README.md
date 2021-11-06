@@ -8,8 +8,6 @@
 
 The project provides additional processing to the [Source++](https://github.com/sourceplusplus/live-platform) open-source live coding platform.
 
-Todo: log summary description and pics
-
 ## Live Coding - Index
 - Live Coding Server
   - [Live Platform](https://github.com/sourceplusplus/live-platform)
