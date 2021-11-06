@@ -11,8 +11,8 @@ The project provides additional backend processing to the [Source++](https://git
 ## Requirements
 
 - SkyWalking OAP
-  - Storage = elasticsearch/elastichsearch7
   - Version >= 8.0.0
+  - Storage = elasticsearch
 - Modules
   - `StorageModule`
 
