@@ -22,22 +22,31 @@ class LoggingProcessorImpl : CoroutineVerticle(), LoggingProcessor {
         private val log = LoggerFactory.getLogger(LoggingProcessorImpl::class.java)
     }
 
-    private lateinit var elasticSearch: EsDAO
+    private var elasticSearch: EsDAO? = null
 
     override suspend fun start() {
         log.info("Starting LoggingProcessorImpl")
-        elasticSearch = LogSummaryProcessor.module!!.find(StorageModule.NAME).provider()
-            .getService(ILogQueryDAO::class.java) as EsDAO
+        try {
+            elasticSearch = LogSummaryProcessor.module!!.find(StorageModule.NAME).provider()
+                .getService(ILogQueryDAO::class.java) as EsDAO
+        } catch (ex: ClassCastException) {
+            log.error("Elasticsearch storage unavailable. Disabled logging processor")
+        }
     }
 
     override fun getPatternOccurredCounts(handler: Handler<AsyncResult<Map<String, Int>>>) {
+        if (elasticSearch != null) {
+            handler.handle(Future.failedFuture("Logging processor disabled"))
+            return
+        }
+
         //todo: add metric timer
         log.info("Getting pattern occurred counts")
         val size = 1000
         val aggregation = Search.builder()
             .aggregation(Aggregation.terms("content").field("content"))
             .size(size).build()
-        val logPatternCounts = (elasticSearch.client.search("log", aggregation)
+        val logPatternCounts = (elasticSearch!!.client.search("log", aggregation)
             .aggregations["content"] as ParsedStringTerms).buckets.stream()
             .collect(Collectors.toMap(Terms.Bucket::getKeyAsString) { it.docCount.toInt() })
         handler.handle(Future.succeededFuture(logPatternCounts))
