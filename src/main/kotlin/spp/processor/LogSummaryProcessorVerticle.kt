@@ -14,7 +14,7 @@ import io.vertx.serviceproxy.ServiceBinder
 import kotlinx.datetime.Instant
 import org.apache.skywalking.oap.server.core.analysis.metrics.DataTable
 import org.slf4j.LoggerFactory
-import spp.processor.LogSummaryProcessor.INSTANCE_ID
+import spp.processor.common.FeedbackProcessor.Companion.INSTANCE_ID
 import spp.processor.logging.LoggingProcessor
 import spp.processor.logging.impl.LoggingProcessorImpl
 import spp.protocol.processor.ProcessorAddress
