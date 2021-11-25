@@ -1,7 +1,6 @@
 package spp.processor
 
 import com.fasterxml.jackson.core.JsonGenerator
-import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.*
 import com.fasterxml.jackson.databind.module.SimpleModule
 import io.vertx.core.json.JsonObject
@@ -18,6 +17,7 @@ import spp.processor.common.FeedbackProcessor.Companion.INSTANCE_ID
 import spp.processor.logging.LoggingProcessor
 import spp.processor.logging.impl.LoggingProcessorImpl
 import spp.protocol.processor.ProcessorAddress
+import spp.protocol.util.KSerializers
 import kotlin.system.exitProcess
 
 class LogSummaryProcessorVerticle : CoroutineVerticle() {
@@ -80,27 +80,5 @@ class LogSummaryProcessorVerticle : CoroutineVerticle() {
                 log.error("Failed to unpublish logging processor", it.cause())
             }
         }.await()
-    }
-
-    class KSerializers {
-        /**
-         * Used to serialize [Instant] classes.
-         *
-         * @since 0.1.0
-         */
-        class KotlinInstantSerializer : JsonSerializer<Instant>() {
-            override fun serialize(value: Instant, jgen: JsonGenerator, provider: SerializerProvider) =
-                jgen.writeNumber(value.toEpochMilliseconds())
-        }
-
-        /**
-         * Used to deserialize [Instant] classes.
-         *
-         * @since 0.1.0
-         */
-        class KotlinInstantDeserializer : JsonDeserializer<Instant>() {
-            override fun deserialize(p: JsonParser, p1: DeserializationContext): Instant =
-                Instant.fromEpochMilliseconds((p.codec.readTree(p) as JsonNode).longValue())
-        }
     }
 }
