@@ -19,7 +19,7 @@ version = logSummaryProcessorVersion
 
 repositories {
     mavenCentral()
-    jcenter()
+    //jcenter()
     maven(url = "https://jitpack.io")
 }
 
