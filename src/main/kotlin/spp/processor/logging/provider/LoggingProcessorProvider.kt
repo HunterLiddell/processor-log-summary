@@ -7,7 +7,7 @@ import org.apache.skywalking.oap.server.library.module.ModuleProvider
 import org.slf4j.LoggerFactory
 import spp.processor.LogSummaryProcessor
 
-class LoggingModule : ModuleDefine("spp-logging") {
+class LoggingModule : ModuleDefine("spp-log-summary") {
     override fun services(): Array<Class<*>> = emptyArray()
 }
 
