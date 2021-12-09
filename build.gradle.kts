@@ -45,7 +45,7 @@ dependencies {
     compileOnly("org.apache.skywalking:agent-analyzer:$skywalkingVersion") { isTransitive = false }
     compileOnly("org.apache.skywalking:event-analyzer:$skywalkingVersion") { isTransitive = false }
     compileOnly("org.apache.skywalking:meter-analyzer:$skywalkingVersion") { isTransitive = false }
-    compileOnly("org.elasticsearch:elasticsearch:7.15.2")
+    compileOnly("org.elasticsearch:elasticsearch:7.16.0")
     compileOnly("io.vertx:vertx-service-discovery:$vertxVersion")
     compileOnly("io.vertx:vertx-service-proxy:$vertxVersion")
     compileOnly("io.vertx:vertx-codegen:$vertxVersion")
