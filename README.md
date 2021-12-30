@@ -19,7 +19,7 @@ This project provides additional backend processing to the [Source++](https://gi
 
 ## Development
 
-### Prerequistes
+### Prerequisites
 
 - Git
 - JDK 11+
