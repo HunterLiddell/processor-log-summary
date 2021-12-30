@@ -15,6 +15,7 @@ This project provides additional backend processing to the [Source++](https://gi
   - Storage = elasticsearch
 - Modules
   - `StorageModule`
+  - `LogAnalyzerModule`
 
 ## Development
 
