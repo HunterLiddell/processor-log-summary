@@ -133,21 +133,6 @@ tasks {
         targetCompatibility = "1.8"
     }
 
-    register("downloadProbeServices") {
-        doLast {
-            val f = File(projectDir, "e2e/spp-skywalking-services-0.2.1.jar")
-            if (!f.exists()) {
-                println("Downloading Source++ JVM probe services")
-                URL("https://github.com/sourceplusplus/probe-jvm/releases/download/0.2.1/spp-skywalking-services-0.2.1.jar")
-                    .openStream().use { input ->
-                        FileOutputStream(f).use { output ->
-                            input.copyTo(output)
-                        }
-                    }
-                println("Downloaded Source++ JVM probe services")
-            }
-        }
-    }
     register("downloadProcessorDependencies") {
         doLast {
             val f = File(projectDir, "e2e/spp-processor-dependencies-$processorDependenciesVersion.jar")
@@ -172,13 +157,11 @@ tasks {
 
     register("assembleUp") {
         dependsOn(
-            "downloadProbeServices", "downloadProcessorDependencies",
-            "shadowJar", "updateDockerFiles", "composeUp"
+            "downloadProcessorDependencies", "shadowJar", "updateDockerFiles", "composeUp"
         )
     }
     getByName("composeUp").mustRunAfter(
-        "downloadProbeServices", "downloadProcessorDependencies",
-        "shadowJar", "updateDockerFiles"
+        "downloadProcessorDependencies", "shadowJar", "updateDockerFiles"
     )
 }
 tasks.getByName<Test>("test") {
