@@ -1,4 +1,9 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 class E2EApp {
+
+    private static final Logger logger = LoggerFactory.getLogger(E2EApp.class);
 
     public static void main(String[] paramArrayOfString) {
         while (true) {
@@ -21,16 +26,9 @@ class E2EApp {
         short sh = Short.MIN_VALUE;
         double d = 00.23d;
         boolean bool = true;
-        System.out.println(
-                String.valueOf(i) + " " +
-                        String.valueOf(c) + " " +
-                        String.valueOf(s) + " " +
-                        String.valueOf(f) + " " +
-                        String.valueOf(max) + " " +
-                        String.valueOf(b) + " " +
-                        String.valueOf(sh) + " " +
-                        String.valueOf(d) + " " +
-                        String.valueOf(bool)
+        logger.info(
+                "i={}, c={}, s={}, f={}, max={}, b={}, sh={}, d={}, bool={}",
+                i, c, s, f, max, b, sh, d, bool
         );
     }
 }

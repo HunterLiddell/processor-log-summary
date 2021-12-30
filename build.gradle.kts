@@ -31,6 +31,7 @@ dependencies {
     compileOnly("com.github.sourceplusplus:processor-dependencies:$processorDependenciesVersion")
     compileOnly("com.github.sourceplusplus.protocol:protocol:$protocolVersion")
     compileOnly("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
+    compileOnly("org.apache.skywalking:log-analyzer:$skywalkingVersion") { isTransitive = false }
     compileOnly("org.apache.skywalking:apm-network:$skywalkingVersion") { isTransitive = false }
     compileOnly("org.apache.skywalking:library-server:$skywalkingVersion") { isTransitive = false }
     compileOnly("org.apache.skywalking:library-module:$skywalkingVersion") { isTransitive = false }
@@ -132,21 +133,6 @@ tasks {
         targetCompatibility = "1.8"
     }
 
-    register("downloadProbe") {
-        doLast {
-            val f = File(projectDir, "e2e/spp-probe-0.2.1.jar")
-            if (!f.exists()) {
-                println("Downloading Source++ JVM probe")
-                URL("https://github.com/sourceplusplus/probe-jvm/releases/download/0.2.1/spp-probe-0.2.1.jar")
-                    .openStream().use { input ->
-                        FileOutputStream(f).use { output ->
-                            input.copyTo(output)
-                        }
-                    }
-                println("Downloaded Source++ JVM probe")
-            }
-        }
-    }
     register("downloadProbeServices") {
         doLast {
             val f = File(projectDir, "e2e/spp-skywalking-services-0.2.1.jar")
@@ -186,12 +172,12 @@ tasks {
 
     register("assembleUp") {
         dependsOn(
-            "downloadProbe", "downloadProbeServices", "downloadProcessorDependencies",
+            "downloadProbeServices", "downloadProcessorDependencies",
             "shadowJar", "updateDockerFiles", "composeUp"
         )
     }
     getByName("composeUp").mustRunAfter(
-        "downloadProbe", "downloadProbeServices", "downloadProcessorDependencies",
+        "downloadProbeServices", "downloadProcessorDependencies",
         "shadowJar", "updateDockerFiles"
     )
 }

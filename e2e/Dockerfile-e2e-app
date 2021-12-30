@@ -1,11 +1,20 @@
-FROM openjdk:11
+FROM azul/zulu-openjdk-alpine:11
+
+RUN apk --no-cache add curl
+
+RUN curl -LJO https://github.com/sourceplusplus/probe-jvm/releases/download/0.2.1/spp-probe-0.2.1.jar
+RUN curl -LJO https://repo1.maven.org/maven2/ch/qos/logback/logback-core/1.2.10/logback-core-1.2.10.jar
+RUN curl -LJO https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar
+RUN curl -LJO https://repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.10/logback-classic-1.2.10.jar
+RUN curl -LJO https://repo1.maven.org/maven2/org/apache/skywalking/apm-toolkit-logback-1.x/8.8.0/apm-toolkit-logback-1.x-8.8.0.jar
 
 ADD E2EApp.java .
-RUN javac -g E2EApp.java
+RUN javac -cp slf4j-api-1.7.32.jar -g E2EApp.java
 RUN jar cvfe E2EApp.jar E2EApp *.class
 
-ADD spp-probe-0.2.1.jar .
 ADD spp-probe.yml .
 
-CMD java -javaagent:spp-probe-0.2.1.jar -jar E2EApp.jar
+ADD logback.xml .
+
+CMD java -javaagent:spp-probe-0.2.1.jar -cp apm-toolkit-logback-1.x-8.8.0.jar:logback-classic-1.2.10.jar:logback-core-1.2.10.jar:slf4j-api-1.7.32.jar:E2EApp.jar -Dlogback.configurationFile=/logback.xml E2EApp
 #CMD java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5105 -javaagent:spp-probe-0.2.1.jar -jar E2EApp.jar
