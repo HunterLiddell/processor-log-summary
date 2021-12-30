@@ -15,3 +15,26 @@ This project provides additional backend processing to the [Source++](https://gi
   - Storage = elasticsearch
 - Modules
   - `StorageModule`
+
+## Development
+
+### Prerequistes
+
+- Git
+- JDK 11+
+- Docker
+- Docker Compose
+
+### Build
+
+```sh
+git clone https://github.com/sourceplusplus/processor-log-summary
+cd processor-log-summary
+./gradlew build
+```
+
+### Test
+
+```sh
+./gradlew assembleUp test -Dtest.profile=integration
+```
